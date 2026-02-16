@@ -1,0 +1,34 @@
+---
+
+demo_dockerhub_token: "{{ lookup('community.general.passwordstore', 'hub.docker.com/token') }}"
+
+passwordstore_cmd: 'pass'
+passwordstore_encrypt_cmd: "{{ passwordstore_cmd }} init"
+passwordstore_git_cmd: "{{ passwordstore_cmd }} git"
+passwordstore_add_cmd: "{{ passwordstore_cmd }} insert -e"
+passwordstore_delete_cmd: "{{ passwordstore_cmd }} rm"
+passwordstore_copy_cmd: "{{ passwordstore_cmd }} cp"
+passwordstore_move_cmd: "{{ passwordstore_cmd }} mv"
+passwordstore_generate_cmd: "{{ passwordstore_cmd }} generate"
+
+gpg_genkey_cmd: "gpg --batch --passphrase '' --homedir ~/.gnupg --quick-generate-key"
+gpg_deletekey_cmd: 'gpg --delete-secret-and-public-keys --batch --yes'
+gpg_listkeys_cmd: 'gpg --list-keys --with-colons --keyid-format=long --with-fingerprint'
+gpg_exportkey_cmd: 'gpg --export --armor'
+gpg_exportprivatekey_cmd: 'gpg --export-secret-keys --armor'
+gpg_importkey_cmd: 'gpg --import -'
+gpg_importtrust_cmd: 'gpg --import-ownertrust -'
+
+githoster: 'github.com'
+githoster_api: "api.{{ githoster }}"
+githoster_api_version: "2022-11-28"
+
+repo_owner: 'tiawl-lab'
+repo_main: "{{ repo_owner }}/demo"
+repo_main_url: "https://{{ githoster }}/{{ repo_main }}.git"
+repo_main_passwordstore_submodule_path: 'ansible/secrets'
+repo_passwordstore: "{{ repo_owner }}/secrets"
+repo_passwordstore_url: "https://{{ githoster }}/{{ repo_passwordstore }}.git"
+
+bot_user: 'GitHub Actions[bot]'
+bot_email: 'bot@noreply.github.com'
