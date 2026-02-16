@@ -1,0 +1,43 @@
+---
+
+demo_dockerhub_token: "{{ lookup('community.general.passwordstore', 'hub.docker.com/token') }}"
+
+passwordstore_cmd: 'pass'
+passwordstore_encrypt_cmd: "{{ passwordstore_cmd }} init"
+passwordstore_git_cmd: "{{ passwordstore_cmd }} git"
+passwordstore_add_cmd: "{{ passwordstore_cmd }} insert -e"
+passwordstore_delete_cmd: "{{ passwordstore_cmd }} rm"
+passwordstore_copy_cmd: "{{ passwordstore_cmd }} cp"
+passwordstore_move_cmd: "{{ passwordstore_cmd }} mv"
+passwordstore_generate_cmd: "{{ passwordstore_cmd }} generate"
+
+githoster_cmd: 'gh'
+githoster_repo_cmd: "{{ githoster_cmd }} repo"
+githoster_repo_list_cmd: "{{ githoster_repo_cmd }} list"
+githoster_repo_create_cmd: "{{ githoster_repo_cmd }} create"
+githoster_issue_cmd: "{{ githoster_cmd }} issue"
+githoster_issue_create_cmd: "{{ githoster_issue_cmd }} create"
+githoster_issue_comment_cmd: "{{ githoster_issue_cmd }} comment"
+githoster_var_cmd: "{{ githoster_cmd }} variable"
+githoster_var_list_cmd: "{{ githoster_var_cmd }} list"
+githoster_var_set_cmd: "{{ githoster_var_cmd }} set"
+
+gpg_cmd: 'gpg'
+gpg_genkey_cmd: "{{ gpg_cmd }} --batch --passphrase '' --homedir ~/.gnupg --quick-generate-key"
+gpg_deletekey_cmd: "{{ gpg_cmd }} --delete-secret-and-public-keys --batch --yes"
+gpg_listkeys_cmd: "{{ gpg_cmd }} --list-keys --with-colons --keyid-format=long --with-fingerprint"
+gpg_exportkey_cmd: "{{ gpg_cmd }} --export --armor"
+gpg_exportprivatekey_cmd: "{{ gpg_cmd }} --export-secret-keys --armor"
+gpg_importkey_cmd: "{{ gpg_cmd }} --import -"
+gpg_importtrust_cmd: "{{ gpg_cmd }} --import-ownertrust -"
+
+repo_owner: 'tiawl-lab'
+repo_githoster: 'github.com'
+repo_main: "{{ repo_owner }}/demo"
+repo_main_url: "https://{{ repo_githoster }}/{{ repo_main }}.git"
+repo_main_passwordstore_submodule_path: 'ansible/secrets'
+repo_passwordstore: "{{ repo_owner }}/secrets"
+repo_passwordstore_url: "https://{{ repo_githoster }}/{{ repo_passwordstore }}.git"
+
+bot_user: 'GitHub Actions[bot]'
+bot_email: 'bot@noreply.github.com'
